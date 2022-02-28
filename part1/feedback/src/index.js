@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./styles.css";
+import FeedbackButton from "./FeedbackButton";
+import Statistics from "./Statistics";
 
 const App = () => {
   const [goodAmount, setGoodAmount] = useState(0);
@@ -8,6 +10,7 @@ const App = () => {
   const [badAmount, setBadAmount] = useState(0);
   const [average, setAverage] = useState(0);
   const [positivePercentage, setPositivePercentage] = useState(0);
+  const [isStatsVisible, setIsStatsVisible] = useState(false);
 
   const calculateAverage = () => {
     let total = goodAmount + neutralAmount + badAmount;
@@ -36,33 +39,38 @@ const App = () => {
     <div className="container">
       <h1>Give us feedback</h1>
       <div>
-        <button
+        <FeedbackButton
           onClick={() => setGoodAmount(goodAmount + 1)}
-          className="button"
-          style={{ color: "green" }}
-        >
-          {"Good"}
-        </button>
-        <button
+          text={"Good"}
+          color={"green"}
+        />
+        <FeedbackButton
           onClick={() => setNeutralAmount(neutralAmount + 1)}
-          className="button"
-        >
-          {"Neutral"}
-        </button>
-        <button
+          text={"Neutral"}
+        />
+        <FeedbackButton
           onClick={() => setBadAmount(badAmount + 1)}
-          className="button"
-          style={{ color: "red" }}
-        >
-          {"Bad"}
-        </button>
+          text={"Bad"}
+          color={"red"}
+        />
       </div>
-      <h2>Stats</h2>
-      <div>{"Good: " + goodAmount}</div>
-      <div>{"Neutral: " + neutralAmount}</div>
-      <div>{"Bad: " + badAmount}</div>
-      <div>{"Average: " + average.toFixed(2)}</div>
-      <div>{"Positive: " + positivePercentage.toFixed(2) + "%"}</div>
+      <div className="container">
+        <button
+          className="FeedbackButton"
+          onClick={() => setIsStatsVisible(!isStatsVisible)}
+        >
+          {(isStatsVisible ? "Hide" : "Show") + " statistics"}
+        </button>
+        {isStatsVisible ? (
+          <Statistics
+            good={goodAmount}
+            neutral={neutralAmount}
+            bad={badAmount}
+            average={average}
+            positive={positivePercentage}
+          />
+        ) : null}
+      </div>
     </div>
   );
 };

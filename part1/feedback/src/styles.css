@@ -23,8 +23,8 @@ code {
   gap: 15px;
 }
 
-.button {
-  width: 100px;
+.FeedbackButton {
+  width: 120px;
   height: 40px;
   margin: 5px;
 }
