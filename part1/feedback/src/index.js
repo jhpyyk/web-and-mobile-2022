@@ -10,30 +10,33 @@ const App = () => {
   const [badAmount, setBadAmount] = useState(0);
   const [average, setAverage] = useState(0);
   const [positivePercentage, setPositivePercentage] = useState(0);
+  const [feedbackTotal, setFeedbackTotal] = useState(0);
   const [isStatsVisible, setIsStatsVisible] = useState(false);
 
   const calculateAverage = () => {
-    let total = goodAmount + neutralAmount + badAmount;
     let weightedTotal = goodAmount - badAmount;
 
-    if (total > 0) {
-      return weightedTotal / total;
+    if (feedbackTotal > 0) {
+      return weightedTotal / feedbackTotal;
     }
     return 0;
   };
 
   const calculatePositivePercentage = () => {
-    let total = goodAmount + neutralAmount + badAmount;
-    if (total > 0) {
-      return (100 * goodAmount) / total;
+    if (feedbackTotal > 0) {
+      return (100 * goodAmount) / feedbackTotal;
     }
     return 0;
   };
 
   useEffect(() => {
+    setFeedbackTotal(goodAmount + neutralAmount + badAmount);
+  }, [goodAmount, neutralAmount, badAmount]);
+
+  useEffect(() => {
     setAverage(calculateAverage());
     setPositivePercentage(calculatePositivePercentage());
-  }, [goodAmount, neutralAmount, badAmount]);
+  }, [feedbackTotal]);
 
   return (
     <div className="container">
@@ -63,6 +66,7 @@ const App = () => {
         </button>
         {isStatsVisible ? (
           <Statistics
+            total={feedbackTotal}
             good={goodAmount}
             neutral={neutralAmount}
             bad={badAmount}
