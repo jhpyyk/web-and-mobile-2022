@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Person = (props) => {
-  return <div>{props.person.name}</div>;
+  return (
+    <tr>
+      <td>{props.person.name}</td>
+      <td>{props.person.number}</td>
+    </tr>
+  );
 };
 
 export default Person;

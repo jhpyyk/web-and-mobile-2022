@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import Person from "./Person";
+import NumberTable from "./NumberTable";
 import PersonForm from "./PersonForm";
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [persons, setPersons] = useState([
+    { name: "Arto Hellas", number: "040-123456" },
+  ]);
 
-  const submitPerson = (nameInput) => {
-    if (persons.findIndex((person) => person.name === nameInput) === -1) {
-      setPersons(persons.concat({ name: nameInput }));
-    } else {
-      alert("Name is already on the list");
-    }
+  const isPersonInTable = (personName) => {
+    return persons.findIndex((person) => person.name === personName) > 0;
+  };
+
+  const submitPerson = (nameInput, numberInput) => {
+    isPersonInTable(nameInput)
+      ? alert("Name is already in the table")
+      : setPersons(persons.concat({ name: nameInput, number: numberInput }));
   };
 
   return (
@@ -18,9 +22,7 @@ const App = () => {
       <h2>Puhelinluettelo</h2>
       <PersonForm submitPerson={submitPerson} />
       <h2>Numerot</h2>
-      {persons.map((person) => (
-        <Person person={person} key={person.name} />
-      ))}
+      <NumberTable persons={persons} />
     </div>
   );
 };
