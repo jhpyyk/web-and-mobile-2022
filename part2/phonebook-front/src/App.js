@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NumberTable from "./NumberTable";
 import PersonForm from "./PersonForm";
+import axios from "axios";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "040-123456" },
-  ]);
+  const [persons, setPersons] = useState([]);
 
   const isPersonInTable = (personName) => {
     return persons.findIndex((person) => person.name === personName) > 0;
@@ -16,6 +15,12 @@ const App = () => {
       ? alert("Name is already in the table")
       : setPersons(persons.concat({ name: nameInput, number: numberInput }));
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/persons").then((response) => {
+      setPersons(response.data);
+    });
+  }, []);
 
   return (
     <div>
