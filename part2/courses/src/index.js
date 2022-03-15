@@ -35,6 +35,7 @@ const Course = (props) => {
     <div>
       <Header course={props.course} />
       <Contents course={props.course} />
+      <Total course={props.course} />
     </div>
   );
 };
@@ -59,8 +60,8 @@ const Part = (props) => {
 
 const Total = (props) => {
   let total = 0;
-  props.parts.forEach((part) => (total += part.exercises));
-  return <p>Total {total} exercises</p>;
+  props.course.parts.forEach((part) => (total += part.exercises));
+  return <p>Total: {total}</p>;
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
