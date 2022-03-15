@@ -11,9 +11,14 @@ const App = () => {
   };
 
   const submitPerson = (nameInput, numberInput) => {
-    isPersonInTable(nameInput)
-      ? alert("Name is already in the table")
-      : setPersons(persons.concat({ name: nameInput, number: numberInput }));
+    if (!isPersonInTable(nameInput)) {
+      let person = { name: nameInput, number: numberInput };
+      axios.post("http://localhost:3001/persons", person).then((response) => {
+        setPersons(persons.concat(response.data));
+      });
+    } else {
+      alert("Name is already in the table");
+    }
   };
 
   useEffect(() => {
