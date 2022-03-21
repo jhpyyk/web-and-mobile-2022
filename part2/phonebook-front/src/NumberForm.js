@@ -6,7 +6,7 @@ const PersonForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.submitPerson(nameInput, numberInput);
+    props.submitNumberEntry(nameInput, numberInput);
     setNameInput("");
     setNumberInput("");
   };

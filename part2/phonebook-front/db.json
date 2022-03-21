@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
       "name": "Martti Tienari",
       "number": "040-123456",
       "id": 2
@@ -19,16 +14,6 @@
       "name": "Lea Kutvonen",
       "number": "040-123456",
       "id": 4
-    },
-    {
-      "name": "sdf",
-      "number": "234234",
-      "id": 5
-    },
-    {
-      "name": "dfgdfg",
-      "number": "345345345",
-      "id": 6
     }
   ]
 }

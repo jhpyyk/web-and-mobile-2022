@@ -1,13 +1,17 @@
 import React from "react";
-import Person from "./Person";
+import NumberEntry from "./NumberEntry";
 
 const NumberTable = (props) => {
   return (
     <div>
       <table>
         <tbody>
-          {props.persons.map((person) => (
-            <Person person={person} key={person.name} />
+          {props.numberEntries.map((entry) => (
+            <NumberEntry
+              numberEntry={entry}
+              key={entry.name}
+              deleteNumberEntry={props.deleteNumberEntry}
+            />
           ))}
         </tbody>
       </table>
