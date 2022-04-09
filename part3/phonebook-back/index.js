@@ -39,6 +39,16 @@ expr.get("/api/persons/:id", (request, response) => {
 expr.post("/api/persons", (request, response) => {
   const body = request.body;
 
+  if (body.name.length === 0) {
+    return response.status(400).json({ error: "Name missing." });
+  } else if (body.number.length === 0) {
+    return response.status(400).json({ error: "Number missing." });
+  } else if (isPersonInList(body.name) !== -1) {
+    return response
+      .status(400)
+      .json({ error: "Person already in list. Name must be unique." });
+  }
+
   const person = {
     name: body.name,
     number: body.number,
@@ -49,6 +59,10 @@ expr.post("/api/persons", (request, response) => {
 
   response.json(person);
 });
+
+const isPersonInList = (name) => {
+  return persons.findIndex((person) => person.name === name);
+};
 
 expr.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
