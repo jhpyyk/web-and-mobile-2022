@@ -1,8 +1,11 @@
 const express = require("express");
 const expr = express();
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 expr.use(bodyParser.json());
+expr.use(cors());
+expr.use(express.static("build"));
 
 let persons = [
   {
